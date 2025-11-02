@@ -4,17 +4,18 @@ A reusable modal dialog component that displays messages to users with different
 
 ## Overview
 
-The Modal component is a flexible dialog component built with React and styled-components. It provides a clean, centered dialog that appears over the main content with a semi-transparent overlay. The component supports different visual types to convey different message categories to users.
+The Modal component is a flexible dialog component built with React and inline CSS. It provides a clean, centered dialog that appears over the main content with a semi-transparent overlay. The component supports different visual types to convey different message categories to users.
 
 ## Dependencies
 
-- **React**: React library for building the component
-- **styled-components**: CSS-in-JS styling library
+- **React**: React library for building the component (v19.1.1 or higher)
+
+The component uses only React and does not require any external styling libraries. All styles are implemented using inline CSS.
 
 ```bash
-npm install react styled-components
+npm install react react-dom
 # or
-yarn add react styled-components
+yarn add react react-dom
 ```
 
 ## Props
@@ -124,18 +125,36 @@ function App() {
 - Icon color matches the modal type (green, red, or blue)
 - Icon is displayed alongside the title
 
+## Component Structure
+
+The Modal component is composed of several sub-components, each handling a specific part of the UI:
+
+- **Overlay**: Fixed positioning with semi-transparent background, handles click-outside events
+- **ModalContent**: White background container with rounded corners and centered layout
+- **CloseButton**: Positioned absolutely in top-right corner with hover effects
+- **TitleContainer**: Flex layout container for displaying the icon and title together
+- **MessageContainer**: Container for the modal message text
+- **IconWrapper**: SVG icon component with dynamic color based on modal type
+
 ## Styling
 
-The component uses styled-components for all styling. The modal includes:
+The component uses inline CSS (React inline styles) for all styling. This approach:
 
-- **Overlay**: Fixed positioning with semi-transparent background
-- **Modal Content**: White background, rounded corners, centered layout
-- **Close Button**: Absolute positioning in top-right, hover effects
-- **Title Container**: Flex layout with icon and text alignment
+- Eliminates external dependencies (no CSS-in-JS libraries required)
+- Keeps styles scoped to the component
+- Provides better performance without runtime style processing
+- Maintains type safety with TypeScript
+
+The modal includes:
+
+- **Overlay**: Fixed positioning with semi-transparent background (`rgba(0, 0, 0, 0.4)`)
+- **Modal Content**: White background, rounded corners (`0.375rem`), centered layout with flexbox
+- **Close Button**: Absolute positioning in top-right, hover opacity effect
+- **Title Container**: Flex layout with icon and text alignment, gap spacing
 - **Message Container**: Centered text display
-- **Icon**: SVG icon with color based on type
+- **Icon**: SVG icon with dynamic color based on type (success: green, error: red, info: blue)
 
-All styling is contained within the component and does not require external CSS files.
+All styling is contained within the component and does not require external CSS files or additional styling dependencies.
 
 ## Accessibility Considerations
 
@@ -200,10 +219,39 @@ const showSuccessModal = () => {
 />
 ```
 
+## Installation from GitHub Packages
+
+This package is published to GitHub Packages. To install it:
+
+1. Create a `.npmrc` file in your project root:
+```
+@sebastien-sq:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=YOUR_GITHUB_TOKEN
+```
+
+2. Install the package:
+```bash
+npm install @sebastien-sq/react-simple-modal
+```
+
+3. Import and use in your code:
+```tsx
+import Modal from '@sebastien-sq/react-simple-modal';
+
+// Use the component
+<Modal
+  isOpen={isOpen}
+  onClose={() => setIsOpen(false)}
+  title="Success"
+  message="Operation completed!"
+  type="success"
+/>
+```
+
 ## File Location
 
 ```
-src/components/modal.tsx
+modal.tsx
 ```
 
 ## Notes
@@ -212,4 +260,6 @@ src/components/modal.tsx
 - The z-index values (999 for overlay, 1000 for content) ensure proper layering
 - The click-outside functionality only triggers when clicking directly on the overlay, not on child elements
 - The component uses TypeScript for type safety
+- All styles are implemented using React inline styles (no external CSS or CSS-in-JS libraries)
+- The component is composed of smaller sub-components (Overlay, ModalContent, CloseButton, TitleContainer, MessageContainer, IconWrapper) for better code organization and maintainability
 
