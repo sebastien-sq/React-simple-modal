@@ -1,6 +1,6 @@
 {
   "name": "@sebastien-sq/react-simple-modal",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A reusable React modal dialog component with inline CSS",
   "main": "modal.tsx",
   "types": "modal.tsx",

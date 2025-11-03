@@ -1,10 +1,10 @@
 # Modal Component
 
-A reusable modal dialog component that displays messages to users with different types (success, error, info). The modal includes an overlay, close button, and click-outside functionality for better user experience.
+A reusable modal dialog component that displays messages to users with different types (success, error, info). The modal includes an overlay, close button, and click-outside functionality for better user experience. Fully accessible with ARIA attributes, keyboard navigation, and focus management.
 
 ## Overview
 
-The Modal component is a flexible dialog component built with React and inline CSS. It provides a clean, centered dialog that appears over the main content with a semi-transparent overlay. The component supports different visual types to convey different message categories to users.
+The Modal component is a flexible dialog component built with React and inline CSS. It provides a clean, centered dialog that appears over the main content with a semi-transparent overlay. The component supports different visual types to convey different message categories to users. It is fully accessible with comprehensive ARIA support, keyboard navigation, and focus management.
 
 ## Dependencies
 
@@ -125,6 +125,12 @@ function App() {
 - Icon color matches the modal type (green, red, or blue)
 - Icon is displayed alongside the title
 
+### 6. Full Accessibility Support
+- ARIA attributes for screen reader support
+- Keyboard navigation (ESC, Tab, Shift+Tab)
+- Focus trap to keep focus within the modal
+- Automatic focus management and restoration
+
 ## Component Structure
 
 The Modal component is composed of several sub-components, each handling a specific part of the UI:
@@ -156,12 +162,39 @@ The modal includes:
 
 All styling is contained within the component and does not require external CSS files or additional styling dependencies.
 
-## Accessibility Considerations
+## Accessibility
 
-- The modal uses semantic HTML elements
-- The close button is keyboard accessible
-- Consider adding ARIA attributes (`aria-labelledby`, `aria-describedby`, `role="dialog"`) for screen readers
-- Consider adding keyboard escape key handling for closing the modal
+The Modal component is fully accessible and complies with WCAG accessibility standards. It includes comprehensive support for screen readers and keyboard navigation.
+
+### ARIA Attributes
+
+- **`role="dialog"`** or **`role="alertdialog"`** - Automatically uses `alertdialog` for error modals to attract attention
+- **`aria-modal="true"`** - Indicates that the modal is a modal dialog
+- **`aria-labelledby`** - Links the modal title for screen reader announcements
+- **`aria-describedby`** - Links the modal message for screen reader announcements
+- **`aria-label`** - Close button has a descriptive label ("Fermer la modale")
+- **`aria-hidden="true"`** - Applied to decorative elements (icon SVG, close button character)
+
+### Keyboard Navigation
+
+- **ESC key** - Closes the modal when pressed
+- **Tab navigation** - Full keyboard navigation support for all interactive elements
+- **Focus trap** - Keeps focus within the modal when using Tab/Shift+Tab
+- **Focus restoration** - Automatically restores focus to the previously focused element when the modal closes
+
+### Focus Management
+
+- **Automatic focus** - Focus is automatically moved to the modal content when it opens
+- **Focus trap** - Tab navigation cycles through focusable elements within the modal only
+- **Focus restoration** - When the modal closes, focus returns to the element that triggered it
+- **Keyboard accessibility** - All interactive elements are fully keyboard accessible
+
+### Screen Reader Support
+
+- Proper semantic HTML structure with ARIA roles and properties
+- Title and message are properly announced by screen readers
+- Modal is not rendered in the DOM when closed (`isOpen={false}`), preventing screen reader confusion
+- Decorative elements are properly marked with `aria-hidden="true"`
 
 ## Examples
 
@@ -256,10 +289,11 @@ modal.tsx
 
 ## Notes
 
-- The modal uses `display: flex` with `display: none` when closed, ensuring it doesn't take up space when hidden
+- The modal returns `null` when `isOpen={false}`, preventing it from being rendered in the DOM when closed (better performance and accessibility)
 - The z-index values (999 for overlay, 1000 for content) ensure proper layering
 - The click-outside functionality only triggers when clicking directly on the overlay, not on child elements
 - The component uses TypeScript for type safety
 - All styles are implemented using React inline styles (no external CSS or CSS-in-JS libraries)
 - The component is composed of smaller sub-components (Overlay, ModalContent, CloseButton, TitleContainer, MessageContainer, IconWrapper) for better code organization and maintainability
+- The component uses React hooks (`useRef`, `useEffect`, `useId`) for focus management and accessibility features
 
