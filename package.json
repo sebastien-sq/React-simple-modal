@@ -1,5 +1,5 @@
 {
-  "name": "@sebastien-sq/react-simple-modal",
+  "name": "sebastien-sq-react-simple-modal",
   "version": "0.0.4",
   "description": "A reusable React modal dialog component with inline CSS",
   "main": "modal.tsx",
@@ -28,8 +28,5 @@
     "react-dom": "^19.1.1",
     "@types/react": "^19.1.16",
     "@types/react-dom": "^19.1.9"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
   }
 }

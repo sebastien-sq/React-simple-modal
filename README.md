@@ -254,22 +254,16 @@ const showSuccessModal = () => {
 
 ## Installation from GitHub Packages
 
-This package is published to GitHub Packages. To install it:
+This package is published to Npm packages.
 
-1. Create a `.npmrc` file in your project root:
-```
-@sebastien-sq:registry=https://npm.pkg.github.com
-//npm.pkg.github.com/:_authToken=YOUR_GITHUB_TOKEN
-```
-
-2. Install the package:
+1. Install the package:
 ```bash
-npm install @sebastien-sq/react-simple-modal
+npm install sebastien-sq-react-simple-modal
 ```
 
 3. Import and use in your code:
 ```tsx
-import Modal from '@sebastien-sq/react-simple-modal';
+import Modal from 'sebastien-sq-react-simple-modal';
 
 // Use the component
 <Modal
